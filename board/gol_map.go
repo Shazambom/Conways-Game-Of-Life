@@ -1,12 +1,10 @@
 package board
 
 import (
-	"fmt"
 	"image"
 	"image/color"
 	"image/color/palette"
 	"math/rand"
-	"strings"
 	"time"
 )
 
@@ -73,31 +71,6 @@ func (f *field) Update() {
 			cell.update(f.nextState[r][c])
 		}
 	}
-}
-
-func (f *field) PrintField() {
-	intArr := make([][]uint8, f.height)
-	for i := 0; i < f.height; i++ {
-		intArr[i] = make([]uint8, f.width)
-	}
-	str := ""
-	for i, row := range f.cells {
-		for j, val := range row {
-			intArr[i][j] = btou(val.alive)
-		}
-	}
-	for _, row := range intArr {
-		str += strings.Trim(strings.Join(strings.Fields(fmt.Sprint(row)), ""), "[]")
-		str += "\n"
-	}
-	fmt.Println(str + "\n\n")
-}
-
-func btou(b bool) uint8 {
-	if b {
-		return 1
-	}
-	return 0
 }
 
 func (f *field) GetCurrentImage() *image.Paletted {
