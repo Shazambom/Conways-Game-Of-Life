@@ -4,17 +4,18 @@ import (
 	"awesomeProject/board"
 	"fmt"
 	"image"
+	"image/color"
 	"image/gif"
 	"os"
 	"runtime"
 )
 
 func main() {
-	field := board.NewField(500, 500, 3)
+	field := board.NewField(250, 250, 2, color.RGBA{225, 225, 225, 0xff})
 	var images []*image.Paletted
 	var delays []int
 	var mem runtime.MemStats
-	frames := 1000
+	frames := 5000
 	for i := 0; i < frames; i++ {
 		field.Update()
 		img := field.GetCurrentImage()

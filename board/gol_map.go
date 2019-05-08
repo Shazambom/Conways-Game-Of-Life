@@ -9,14 +9,15 @@ import (
 )
 
 type field struct {
-	height, width int
+	height, width, scale int
 	nextState [][]bool
 	cells [][]*cell
-	scale int
+	color color.Color
+
 }
 
-func NewField(height int, width int, scale int) *field {
-	f := field{height, width,make([][]bool, height), make([][]*cell, height), scale}
+func NewField(height int, width int, scale int, color color.Color) *field {
+	f := field{height, width, scale,make([][]bool, height), make([][]*cell, height), color}
 	for i := range f.nextState {
 		f.nextState[i] = make([]bool, width)
 		f.cells[i] = make([]*cell, width)
@@ -80,7 +81,7 @@ func (f *field) GetCurrentImage() *image.Paletted {
 			if f.cells[i][j].alive {
 				for k := 0; k < f.scale; k++ {
 					for l := 0; l < f.scale; l++ {
-						img.Set((j * f.scale) + l, (i * f.scale) + k, color.RGBA{255, 255, 0, 0xff})
+						img.Set((j * f.scale) + l, (i * f.scale) + k, f.color)
 					}
 				}
 			} else {
