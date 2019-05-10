@@ -27,7 +27,7 @@ func NewField(height int, width int, scale int, color color.Color) *field {
 		for j := 0; j < width; j++ {
 			alive := random.Int31()&(1<<30) == 0
 			f.nextState[i][j] = alive
-			f.cells[i][j] = &cell{ i, j,alive, make([]*cell, 0)}
+			f.cells[i][j] = &cell{alive,make([]*cell, 0)}
 		}
 	}
 	for i := 0; i < height; i++ {

@@ -1,7 +1,6 @@
 package board
 
 type cell struct {
-	col, row int
 	alive bool
 	neighbors []*cell
 }
